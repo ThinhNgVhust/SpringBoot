@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Person List page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th colspan="3">Customize</th>
+  </tr>
+ <tr th:each="person: ${pList}">
+    <td th:text="${person.name}" />
+    <td th:text="${person.age}" />
+    <td><a th:href="@{/person/detail/{id}(id = ${person.id})}">Detail</a></td>
+    <td><span><a th:href="@{/person/edit/{id}(id = ${person.id})}">Edit</a></span></span></td>
+    <td><a th:href="@{/person/delete/{id}(id = ${person.id})}">Delete</a></td>
+    
+</tr>
+</table>
+</body>
+</html>
