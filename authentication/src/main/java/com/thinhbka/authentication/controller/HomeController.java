@@ -27,15 +27,15 @@ public class HomeController {
 	    return "signup_form";
 	}
 	
-	@PostMapping("/process_register")
-	public String processRegister(User user) {
-	    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	    String encodedPassword = passwordEncoder.encode(user.getPassword());
-	    user.setPassword(encodedPassword);
-	     
-	    userRepo.save(user);
-	     
-	    return "register_success";
-	}
+//	@PostMapping("/process_register")
+//	public String processRegister(User user) {
+//	    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//	    String encodedPassword = passwordEncoder.encode(user.getPassword());
+//	    user.setPassword(encodedPassword);
+//	     
+//	    userRepo.save(user);
+//	     
+//	    return "register_success";
+//	}
 	
 }
