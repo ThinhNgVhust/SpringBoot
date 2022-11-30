@@ -20,8 +20,11 @@ public class IndexController {
 	@Autowired
 	ProductService productService;
 	@GetMapping("/")
-	public String index(Model model) {
-		return viewPage(model, 1, "name", "asc");
+	public String index(Model model,@Param("keyword") String keyword) {
+		System.out.println("keyword:"+keyword);
+		model.addAttribute("keyword", keyword);
+		return viewPage(model, 1, "name", "asc",keyword);
+		
 	}
 	
 	
@@ -29,22 +32,21 @@ public class IndexController {
 	public String viewPage(Model model, 
 			@PathVariable(name = "pageNum") int pageNum,
 			@Param("sortField") String sortField,
-			@Param("sortDir") String sortDir ) {
-		
-		Page<Product> pageProduct = productService.listAll(pageNum, sortField, sortDir);
+			@Param("sortDir") String sortDir,
+			@Param("keyword") String keyword) {
+		System.out.println("search with kw: "+keyword);
+		Page<Product> pageProduct = productService.listAll(pageNum, sortField, sortDir,keyword);
 		
 		List<Product> listProducts = pageProduct.getContent();
 		System.out.println(listProducts);
 		model.addAttribute("listProducts", listProducts);
-		
-		
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("sortDir", sortDir);
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-		
 		model.addAttribute("currentPage", pageNum);		
 		model.addAttribute("totalPages", pageProduct.getTotalPages());
 		model.addAttribute("totalItems", pageProduct.getTotalElements());
+		model.addAttribute("keyword", keyword);
 		
 		return "index";
 	}
