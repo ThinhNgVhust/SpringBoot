@@ -11,18 +11,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.thinhbka.springboot.model.Product;
 import com.thinhbka.springboot.service.ProductService;
 
 @Controller
-public class IndexController {
+@RequestMapping("/products")
+public class ProductController {
+	
 	@Autowired
 	ProductService productService;
-	@GetMapping("/")
+	
+	@GetMapping({"/",""})
 	public String index(Model model,@Param("keyword") String keyword) {
-		System.out.println("keyword:"+keyword);
+		if(keyword==null) {
+			keyword="";
+		}
 		model.addAttribute("keyword", keyword);
+		System.out.println("hereeee");
 		return viewPage(model, 1, "name", "asc",keyword);
 		
 	}
@@ -34,9 +41,9 @@ public class IndexController {
 			@Param("sortField") String sortField,
 			@Param("sortDir") String sortDir,
 			@Param("keyword") String keyword) {
-		System.out.println("search with kw: "+keyword);
 		Page<Product> pageProduct = productService.listAll(pageNum, sortField, sortDir,keyword);
-		
+		System.out.println("/page/{pageNum} "+ pageNum);
+		System.out.println("keyword: "+keyword);
 		List<Product> listProducts = pageProduct.getContent();
 		System.out.println(listProducts);
 		model.addAttribute("listProducts", listProducts);
@@ -61,7 +68,7 @@ public class IndexController {
 	@PostMapping("/save")
 	public String saveProduct(@ModelAttribute("product") Product product) {
 		productService.save(product);
-		return "redirect:/";
+		return "redirect:/products";
 	}
 	@GetMapping("/delete/{id}")
 	public String deleteProduct(@PathVariable(name = "id") Long id) {

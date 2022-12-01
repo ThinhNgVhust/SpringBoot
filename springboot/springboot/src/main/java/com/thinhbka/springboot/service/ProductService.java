@@ -18,7 +18,7 @@ public class ProductService {
 	public Page<Product> listAll(int pageNum, String sortField, String sortDir,String keySearch) {
 		Pageable pageable = PageRequest.of(pageNum-1, 5,
 				sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
-		if(keySearch!=null) {
+		if(keySearch!=null && keySearch.equals("")==false) {
 			return repo.getProductsWithSearchWord(keySearch, pageable);
 		}
 		
