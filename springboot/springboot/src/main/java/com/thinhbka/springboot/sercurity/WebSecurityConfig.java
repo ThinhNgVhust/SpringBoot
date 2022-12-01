@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.thinhbka.springboot.service.CustomUserDetailsService;
 
 
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends  WebSecurityConfigurerAdapter{
