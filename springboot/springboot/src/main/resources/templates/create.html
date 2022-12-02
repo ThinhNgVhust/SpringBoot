@@ -9,14 +9,14 @@
 </head>
 <body>
 	<div align="center">
-		<h1>Create new product</h1>
+		<h1>[[#{product.create.h1}]]</h1>
 		<br />
 		<form action="#" th:action="@{/products/save}" th:object="${product}"
 			method="post">
 			
 			<div class="form-group">
 			<div class="col">
-			      <label>Product Name:</label>
+			      <label>[[#{product.create.name}]]</label>
 			      </div>
 			      <div class="col">
 			      <input type="text" th:field="*{name}" >
@@ -25,7 +25,7 @@
 			
 			<div class="form-group">
 			<div class="col">
-			      <label >Brand:</label>
+			      <label >[[#{product.create.brand}]]</label>
 			      </div>
 			      <div class="col">
 			      <input type="text" th:field="*{brand}" >
@@ -34,7 +34,7 @@
 			
 			<div class="form-group">
 			<div class="col">
-			      <label >Made in:</label>
+			      <label >[[#{product.create.madein}]]</label>
 			      </div>
 			      <div class="col">
 			      <input type="text" th:field="*{madein}" >
@@ -42,13 +42,13 @@
 			</div>
 			<div class="form-group">
 			<div class="col">
-			      <label >Price:</label>
+			      <label >[[#{product.create.price}]]</label>
 			      </div>
 			      <div class="col">
 			      <input type="text" th:field="*{price}" >
 			      </div>
 			</div>
-			<button type="submit" class="btn btn-primary">Save</button>
+			<button type="submit" class="btn btn-primary">[[#{product.create.create}]]</button>
 			
 		</form>
 	</div>

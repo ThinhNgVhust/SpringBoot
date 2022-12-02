@@ -14,20 +14,20 @@
 	<hr>
         <form th:action="@{/logout}" method="post">
             <p>
-                Welcome <b th:text="${#request.userPrincipal.principal.fullName}"></b>
+               [[#{index.welcome}]] <b th:text="${#request.userPrincipal.principal.fullName}"></b>
             </p>
-            <input type="submit"  class="btn btn-primary" value="Sign Out" />
+            <input type="submit"  class="btn btn-primary" th:value="#{index.signout}" />
         </form>
     </div>	
-	<h1>Product Manager</h1>
-	<a th:href="@{/products/new}">Create New Product</a>
+	<h1>[[#{index.pm}]]</h1>
+	<a th:href="@{/products/new}">[[#{index.create_new}]]</a>
 	<br/>
 	<form th:action="@{/products}">
-	    Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+	    [[#{index.filter}]] <input  type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
 	    &nbsp;
-	    <input type="submit" value="Search" />
+	    <input class="btn btn-primary" type="submit" th:value="#{index.search}" />
 	    &nbsp;
-	    <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+	    <input class="btn btn-primary" type="button" th:value="#{index.clear}" id="btnClear" onclick="clearSearch()" />
 	</form>
 	<br/><br/>
 	
@@ -35,35 +35,35 @@
 		<thead class="thead-dark">
 			<tr>
 				<th>
-					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">Product ID</a>
+					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">[[#{index.pm.id}]]</a>
 				</th>
 				<th>
-					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">Name</a>
+					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">[[#{index.pm.name}]]</a>
 				</th>
 				<th>
-					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=brand&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">Brand</a>
+					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=brand&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">[[#{index.pm.brand}]]</a>
 				</th>
 				<th>
-					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=madein&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">Made In</a>
+					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=madein&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">[[#{index.pm.madein}]]</a>
 				</th>
 				<th>
-					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">Price</a>
+					<a th:href="@{'/products/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}+'&keyword=' +${keyword}}">[[#{index.pm.price}]]</a>
 				</th>
 				
-				<th><a href="#">Actions</a></th>
+				<th><a href="#">[[#{index.pm.action}]]</a></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="product : ${listProducts}">
-				<td th:text="${product.id}">Product ID</td>
-				<td th:text="${product.name}">Name</td>
-				<td th:text="${product.brand}">Brand</td>
-				<td th:text="${product.madein}">Made in</td>
-				<td th:text="${product.price}">Price</td>
+				<td th:text="${product.id}"></td>
+				<td th:text="${product.name}"></td>
+				<td th:text="${product.brand}"></td>
+				<td th:text="${product.madein}"></td>
+				<td th:text="${product.price}"></td>
 				<td>
-					<a th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
+					<a th:href="@{'/products/edit/' + ${product.id}}">[[#{index.pm.edit}]]</a>
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<a th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
+					<a th:href="@{'/products/delete/' + ${product.id}}">[[#{index.pm.delete}]]</a>
 				</td>
 			</tr>
 		</tbody>
@@ -72,15 +72,15 @@
 	<div><i>Sorted by [[${sortField}]] in [[${sortDir}]] order</i></div>
 	<div>&nbsp;</div>
 	<div th:if="${totalPages > 1}">
-		Total Items: [[${totalItems}]]
+		[[#{index.total}]]: [[${totalItems}]]
 		&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
 		
-		<a th:if="${currentPage > 1}" th:href="@{'/products/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&keyword=' + ${keyword}}">First</a>
-		<span th:unless="${currentPage > 1}">First</span>
+		<a th:if="${currentPage > 1}" th:href="@{'/products/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&keyword=' + ${keyword}}">[[#{index.first}]]</a>
+		<span th:unless="${currentPage > 1}">[[#{index.first}]]</span>
 		&nbsp;&nbsp;
 		
-		<a th:if="${currentPage > 1}" th:href="@{'/products/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&keyword=' + ${keyword}}">Previous</a>
-		<span th:unless="${currentPage > 1}">Previous</span>
+		<a th:if="${currentPage > 1}" th:href="@{'/products/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&keyword=' + ${keyword}}">[[#{index.previous}]]</a>
+		<span th:unless="${currentPage > 1}">[[#{index.previous}]]</span>
 		
 		&nbsp;&nbsp;
 		
@@ -90,12 +90,12 @@
 			&nbsp;
 		</span>
 		
-		<a th:if="${currentPage < totalPages}" th:href="@{'/products/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&keyword=' + ${keyword}}">Next</a>
-		<span th:unless="${currentPage < totalPages}">Next</span>
+		<a th:if="${currentPage < totalPages}" th:href="@{'/products/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&keyword=' + ${keyword}}">[[#{index.next}]]</a>
+		<span th:unless="${currentPage < totalPages}">[[#{index.next}]]</span>
 		&nbsp;&nbsp;
 		
-		<a th:if="${currentPage < totalPages}" th:href="@{'/products/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&keyword=' + ${keyword}}">Last</a>
-		<span th:unless="${currentPage < totalPages}">Last</span>
+		<a th:if="${currentPage < totalPages}" th:href="@{'/products/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}+ '&keyword=' + ${keyword}}">[[#{index.last}]]</a>
+		<span th:unless="${currentPage < totalPages}">[[#{index.last}]]</span>
 	</div>
 </div>
 	<hr>
