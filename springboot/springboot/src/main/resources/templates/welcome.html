@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Welcome Page</title>
 <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#locales").change(function () {
+        var selectedOption = $('#locales').val();
+        if (selectedOption != ''){
+            window.location.replace('/?lang=' + selectedOption);
+        }
+    });
+});
+</script>
 </head>
 <body>
+<span >[[#{lang.change}]]</span>:
+<select id="locales">
+ 	<option value=""></option>
+    <option value="en">[[#{lang.eng}]]</option>
+    <option value="vi">[[#{lang.vi}]]</option>
+</select>
  <div class="container text-center">
-        <h1>Welcome to Website!</h1>
-        <h3><a th:href="@{/products}">List of Products</a></h3>
-        <h3><a th:href="@{/register}">Register</a></h3>
-        <h3><a th:href="@{/login}">Login</a></h3>
+        <h1>[[#{lang.greeting}]]</h1>
+        <h3><a th:href="@{/products}">[[#{lang.product}]]</a></h3>
+        <h3><a th:href="@{/register}">[[#{lang.register}]]</a></h3>
+        <h3><a th:href="@{/login}">[[#{lang.login}]]</a></h3>
     </div>
 </body>
 </html>
