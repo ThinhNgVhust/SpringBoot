@@ -20,7 +20,9 @@ public class User {
 	     
 	    @Column(name = "last_name", nullable = false, length = 20)
 	    private String lastName;
-
+	    
+	    @Column(name="photo", nullable = true,length = 64)
+	    private String photo;
 		public Long getId() {
 			return id;
 		}
@@ -60,4 +62,18 @@ public class User {
 		public void setLastName(String lastName) {
 			this.lastName = lastName;
 		}
+		public void setPhoto(String photo) {
+			this.photo = photo;
+		}
+		
+		public String getPhoto() {
+			return this.photo;
+		}
+		
+		@Transient
+	    public String getPhotosImagePath() {
+	        if (photo == null || id == null) return null;
+	         
+	        return "/user-photos/" + id + "/" + photo;
+	    }
 }

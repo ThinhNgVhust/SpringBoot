@@ -1,6 +1,9 @@
 package com.thinhbka.springboot.controller;
 
+import java.security.Principal;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,14 +25,11 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
-	
 	@GetMapping({"/",""})
 	public String index(Model model,@Param("keyword") String keyword) {
 		if(keyword==null) {
 			keyword="";
 		}
-		model.addAttribute("keyword", keyword);
-		System.out.println("hereeee");
 		return viewPage(model, 1, "name", "asc",keyword);
 		
 	}
